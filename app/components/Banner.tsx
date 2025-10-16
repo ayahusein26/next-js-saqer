@@ -149,28 +149,3 @@ export default function Banner() {
     </section>
   );
 }
- {
-  // مصفوفة البيانات
-  const people = [
-    { name: "Aya", age: 12 },
-    { name: "Abd", age: 15 },
-    { name: "Jad", age: 19 },
-  ];
-
-
-    <section className="flex justify-center items-center min-h-screen bg-gray-200">
-      {/* الحاوية العامة */}
-      <div className="flex space-x-8">
-        {people.map((person, index) => (
-          <div
-            key={index}
-            className="bg-gray-300 w-24 h-24 flex flex-col justify-center items-center rounded-md shadow-md hover:scale-105 transition-transform duration-300"
-          >
-            <p className="text-lg font-semibold text-black">{person.name}</p>
-            <p className="text-xl font-bold text-gray-700">{person.age}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-}
