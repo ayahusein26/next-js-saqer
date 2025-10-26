@@ -1,68 +1,42 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-// لا يوجد import للصورة
+import { motion } from "framer-motion";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+export default function Header() {
   return (
-    <header className="bg-[#231C19] text-white shadow-lg">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          {/* اللوجو */}
-          <div className="flex items-center space-x-2">
-            <div className="w-32 h-20 flex items-center justify-center overflow-hidden">
-              <Image src="/logo1.png" alt="Logo1" width={128} height={80} priority />
-            </div>
+    <header className="relative bg-gradient-to-r from-[#001E1B] via-[#002A26] to-[#001E1B] py-4 px-6 shadow-[0_4px_25px_rgba(0,42,38,0.6)] overflow-hidden">
+      {/* خلفية متحركة خفيفة */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-[#002A26]/30 via-transparent to-[#002A26]/30 blur-2xl"
+        animate={{ x: ["-20%", "20%", "-20%"] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* اللوجو */}
+      <div className="container mx-auto flex justify-center items-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -15, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1 }}
+          whileHover={{ scale: 1.05, rotate: 1 }}
+          className="cursor-pointer select-none"
+        >
+          <div className="relative w-36 h-16 md:w-40 md:h-20">
+            <Image
+              src="/logo1.png"
+              alt="Prime Tech Logo"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 200px"
+              className="object-contain drop-shadow-[0_0_20px_rgba(0,42,38,0.8)]"
+            />
           </div>
-
-          {/* القائمة للمكتب */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="hover:text-[#2CA49B] transition duration-300 font-medium">HOME</a>
-            <a href="#about" className="hover:text-[#2CA49B] transition duration-300 font-medium">ABOUT</a>
-            <a href="#services" className="hover:text-[#2CA49B] transition duration-300 font-medium">SERVICES</a>
-            <a href="#contact" className="hover:text-[#2CA49B] transition duration-300 font-medium">CONTACT US</a>
-          </nav>
-
-          {/* الأزرار */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="bg-white text-[#2CA49B] px-6 py-2.5 rounded-xl font-semibold hover:bg-[#2CA49B] hover:text-white transition-all duration-300 shadow-lg hover:shadow-2xl border-2 border-white hover:border-[#2CA49B]">
-              SIGN IN
-            </button>
-            <button className="bg-transparent text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-black hover:text-[#2CA49B] transition-all duration-300 border-2 border-white/80 hover:border-white shadow-lg hover:shadow-2xl backdrop-blur-sm">
-              SIGN UP
-            </button>
-          </div>
-
-          {/* زر القائمة للموبايل */}
-          <button
-            className="md:hidden text-2xl hover:text-[#2CA49B] transition duration-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            ☰
-          </button>
-        </div>
-
-        {/* القائمة للموبايل */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-[#2CA49B] pt-4">
-            <nav className="flex flex-col space-y-4">
-              <a href="#home" className="hover:text-[#2CA49B] transition duration-300 py-2">HOME</a>
-              <a href="#about" className="hover:text-[#2CA49B] transition duration-300 py-2">ABOUT US</a>
-              <a href="#services" className="hover:text-[#2CA49B] transition duration-300 py-2">SERVICES</a>
-              <a href="#contact" className="hover:text-[#2CA49B] transition duration-300 py-2">CONTACT US</a>
-              <div className="flex flex-col space-y-2 pt-2">
-                <button className="bg-white text-[#2CA49B] px-4 py-2 rounded-lg font-medium hover:bg-[#2CA49B] hover:text-white transition duration-300">LOGIN</button>
-                <button className="bg-transparent border-2 border-white px-4 py-2 rounded-lg font-medium hover:bg-white hover:text-[#2CA49B] transition duration-300">SIGN UP</button>
-              </div>
-            </nav>
-          </div>
-        )}
+        </motion.div>
       </div>
+
+      {/* شريط ظل سفلي أنيق */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00A896]/60 to-transparent"></div>
     </header>
   );
-};
-
-export default Header;
+}
