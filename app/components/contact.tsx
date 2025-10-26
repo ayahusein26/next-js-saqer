@@ -56,7 +56,7 @@ export default function ContactUs() {
 
   const contactInfo = [
     { icon: <Mail className="w-6 h-6" />, title: "Email Us", details: "info@primetech.com", description: "Send us an email anytime" },
-    { icon: <Phone className="w-6 h-6" />, title: "Call Us", details: "+963 944 123 456", description: "Sun to Thu 9am - 6pm" },
+    { icon: <Phone className="w-6 h-6" />, title: "Call Us", details: "+963 ", description: "Sun to Thu 9am - 6pm" },
     { icon: <MapPin className="w-6 h-6" />, title: "Visit Us", details: "Damascus, Syria", description: "Come say hello at our office" },
     { icon: <Clock className="w-6 h-6" />, title: "Response Time", details: "Within 24 Hours", description: "We respond quickly to all inquiries" },
   ];
