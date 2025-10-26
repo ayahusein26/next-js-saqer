@@ -4,15 +4,10 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#002A26] py-8 shadow-inner">
-      <div className="container mx-auto flex flex-col items-start text-left space-y-2 px-6">
-        {/* النص فوق اللوغو */}
-        <p className="text-[#B19766] text-xs tracking-wider uppercase font-medium">
-          Powered by <span className="text-white">Prime Tech Solution</span>
-        </p>
-
+    <footer className="bg-[#002A26] py-6 shadow-inner">
+      <div className="container mx-auto flex items-center justify-end px-6">
         {/* اللوغو */}
-        <div className="w-28 h-20 relative">
+        <div className="w-16 h-12 relative ml-3">
           <Image
             src="/logo1.png"
             alt="Prime Tech Logo"
@@ -22,6 +17,11 @@ export default function Footer() {
             priority
           />
         </div>
+
+        {/* النص بجانب اللوغو */}
+        <p className="text-[#B19766] text-xs tracking-wide font-medium text-right">
+          Powered by <span className="text-white">Prime Tech Solution</span>
+        </p>
       </div>
     </footer>
   );
