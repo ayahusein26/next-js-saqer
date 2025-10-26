@@ -3,6 +3,8 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
+    console.log("📨 Received data:", await request.text());
+
     const { name, email, company, message } = await request.json();
 
     if (!name || !email || !message) {
@@ -16,7 +18,7 @@ export async function POST(request: Request) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "ayahussein884@gmail.com", // بريد المرسل
+        user: "ayahusein611@gmail.com", // بريد المرسل
         pass: process.env.EMAIL_PASS, // كلمة مرور التطبيق من Gmail
       },
     });
@@ -24,7 +26,7 @@ export async function POST(request: Request) {
     // إعداد الإيميل
     const mailOptions = {
       from: `"Prime Tech Website" <${email}>`,
-      to: "ayahussein884@gmail.com", // البريد الذي تصلك عليه الرسائل
+      to: "ayahusein611@gmail.com", // البريد الذي تصلك عليه الرسائل
       subject: `New Contact Message from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>

@@ -32,7 +32,6 @@ export default function ContactUs() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // ✅ إرسال البيانات إلى /api/contact
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -40,19 +39,13 @@ export default function ContactUs() {
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
-
-      if (data.success) {
-        setIsSubmitted(true);
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      if (data.success) setIsSubmitted(true);
+      else alert("Something went wrong. Please try again.");
     } catch (error) {
       console.error(error);
       alert("Error sending message. Please try again later.");
@@ -74,7 +67,6 @@ export default function ContactUs() {
       className="relative py-20 bg-gradient-to-br from-[#002A26] via-[#002A26] to-[#002A26] overflow-hidden"
       aria-labelledby="contact-title"
     >
-      {/* خلفية متحركة */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 w-72 h-72 bg-[#B19766]/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#B19766]/10 rounded-full blur-3xl animate-pulse" />
@@ -82,7 +74,6 @@ export default function ContactUs() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* العنوان */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -94,23 +85,9 @@ export default function ContactUs() {
             <Sparkles className="w-5 h-5 text-[#B19766] mr-2" />
             <span className="text-[#B19766] font-semibold">Get In Touch</span>
           </div>
-
-          <h2 id="contact-title" className="text-5xl lg:text-6xl font-bold text-white mb-6">
-            Let&apos;s{" "}
-            <span className="bg-gradient-to-r from-[#B19766] to-[#C9B27A] bg-clip-text text-transparent">
-              Talk
-            </span>
-          </h2>
-
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-           Contact us anytime, as we are here to serve and support you at every step.
-            We are an expert team specialized 
-           in providing innovative technical solutions to develop your business.
-          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* معلومات التواصل */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -141,27 +118,6 @@ export default function ContactUs() {
                 </motion.div>
               ))}
             </div>
-
-            {/* 🗺️ الخريطة */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 mt-8"
-            >
-              <h4 className="text-xl font-bold text-white mb-4">Our Location</h4>
-              <div className="aspect-video rounded-xl overflow-hidden border border-[#B19766]/30 shadow-lg">
-                <iframe
-                  src="https://maps.app.goo.gl/uxMxJWw4UFqhVZCc9"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* نموذج التواصل */}
@@ -226,7 +182,7 @@ export default function ContactUs() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Company Name*
+                    Company Name
                   </label>
                   <input
                     type="text"
@@ -278,7 +234,6 @@ export default function ContactUs() {
         </div>
       </div>
 
-      {/* الشريط السفلي */}
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#002A26] to-transparent" />
     </section>
   );
