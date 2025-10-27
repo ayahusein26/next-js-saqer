@@ -1,32 +1,27 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
   try {
-    console.log("📨 Received data:", await request.text());
-
     const { name, email, company, message } = await request.json();
 
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { success: false, error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
-    // إعداد SMTP
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.SMTP_HOST, // in-v3.mailjet.com
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: false,               // STARTTLS
+      requireTLS: true,
       auth: {
-        user: "ayahusein611@gmail.com", // بريد المرسل
-        pass: process.env.EMAIL_PASS, // كلمة مرور التطبيق من Gmail
+        user: process.env.EMAIL_USER!, // API Key
+        pass: process.env.EMAIL_PASS!, // Secret Key
       },
     });
 
-    // إعداد الإيميل
-    const mailOptions = {
-      from: `"Prime Tech Website" <${email}>`,
-      to: "ayahusein611@gmail.com", // البريد الذي تصلك عليه الرسائل
+    await transporter.sendMail({
+      from: `"Prime Tech Website" <${process.env.FROM_EMAIL}>`,
+      to: process.env.TO_EMAIL,
+      replyTo: email,
       subject: `New Contact Message from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -36,10 +31,7 @@ export async function POST(request: Request) {
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,
-    };
-
-    // إرسال البريد
-    await transporter.sendMail(mailOptions);
+    });
 
     return NextResponse.json({ success: true });
   } catch (error) {

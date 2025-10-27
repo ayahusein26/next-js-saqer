@@ -44,7 +44,12 @@ export default function ContactUs() {
       });
 
       const data = await res.json();
-      if (data.success) setIsSubmitted(true);
+      if (data.success){
+        setIsSubmitted(true); 
+         setFormData({ name: "", email: "", company: "", message: "" });
+
+
+      }
       else alert("Something went wrong. Please try again.");
     } catch (error) {
       console.error(error);
@@ -55,7 +60,8 @@ export default function ContactUs() {
   };
 
   const contactInfo = [
-    { icon: <Mail className="w-6 h-6" />, title: "Email Us", details: "info@primetech.com", description: "Send us an email anytime" },
+      { icon: <Mail className="w-6 h-6" />, title: "Email Us", details: "info@codevation.co.uk", description: "Send us an email anytime" },
+
     { icon: <Phone className="w-6 h-6" />, title: "Call Us", details: "+963 ", description: "Sun to Thu 9am - 6pm" },
     { icon: <MapPin className="w-6 h-6" />, title: "Visit Us", details: "Damascus, Syria", description: "Come say hello at our office" },
     { icon: <Clock className="w-6 h-6" />, title: "Response Time", details: "Within 24 Hours", description: "We respond quickly to all inquiries" },
